@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+export interface IQuery<T> {
+  find?: T;
+}
 export interface IModel {
   _id?: string | any;
   deleted?: Boolean;
@@ -23,8 +26,8 @@ export interface IGroupModel extends IModel {
 export interface IMessageModel extends IModel {
   content: string;
   group: string | IGroupModel;
+  clientId?: string;
 }
-
 export interface ITodoModel extends IModel {
   title: string;
   description: string;

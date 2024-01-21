@@ -17,6 +17,9 @@ const schema = new Schema<IMessageModel>(
       ref: RESOURCE.GROUPS,
       required: true,
     },
+    clientId: {
+      type: String,
+    },
     deleted: {
       type: Boolean,
       default: false,

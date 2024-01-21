@@ -1,9 +1,10 @@
-import { IMessageModel } from "../../../types";
+import { IMessageModel, IQuery } from "../../../types";
 import model from "./model";
 import { ClientSession } from "mongoose";
 
-async function getAll() {
-  return await model.find({ deleted: false });
+async function getAll(query: IQuery<any> = {}) {
+  const { find } = query;
+  return await model.find({ ...find, deleted: false });
 }
 
 async function getById(_id: string) {

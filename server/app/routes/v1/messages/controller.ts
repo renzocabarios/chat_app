@@ -5,7 +5,8 @@ import { Request, Response } from "express";
 import { EVENT } from "../../../constants";
 
 const getAll = async (_req: Request, _res: Response) => {
-  const data = await service.getAll();
+  const find = _req.query.find ? JSON.parse(_req.query.find?.toString()) : {};
+  const data = await service.getAll({ find });
   _res.send({
     data,
     status: "success",
@@ -36,7 +37,7 @@ const add = async (_req: any, _res: Response) => {
       session,
       async () => {
         const data = await service.add({ ..._req.body }, session);
-        _req.io.emit(EVENT.CREATED_MESSAGE, {
+        _req.io.emit(`${EVENT.CREATED_MESSAGE}/${data[0]?._id}`, {
           data,
         });
         return data;

@@ -6,12 +6,21 @@ import { addRoutes } from "./app/routes/index.js";
 import { addMiddlewares } from "./app/middlewares/index.js";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { EVENT } from "./app/constants";
 const app: Express = express();
 
 //initialization
 const start = () => {
   const server = createServer(app);
   const io = new Server(server, { cors: { origin: "*" } });
+
+  io.on("connection", (socket) => {
+    console.log(socket.id);
+
+    io.to(socket.id).emit(EVENT.CLIENT_CONNECTED, {
+      clientId: socket.id,
+    });
+  });
 
   app.use((req: any, res: any, next: any) => {
     req.io = io;
@@ -32,7 +41,7 @@ const start = () => {
   connectDB(ENV.MONGO_CON).then(() => {
     console.log(`Database connected to ${ENV.MONGO_CON}`);
 
-    app.listen(ENV.PORT, () => {
+    server.listen(ENV.PORT, () => {
       console.log(`Server started on port ${ENV.PORT}`);
     });
   });
