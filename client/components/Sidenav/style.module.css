@@ -1,0 +1,8 @@
+.container {
+  width: 20%;
+  @apply bg-gray-200;
+}
+
+.group_container {
+  @apply p-4;
+}

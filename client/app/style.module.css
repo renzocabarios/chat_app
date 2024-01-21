@@ -1,0 +1,8 @@
+.container {
+  @apply flex min-h-screen;
+}
+
+.content {
+  width: 80%;
+  @apply p-10 bg-gray-100;
+}

@@ -1,0 +1,9 @@
+.messages_container {
+  height: 90%;
+  @apply bg-gray-200 w-full p-2;
+}
+
+.reply_container {
+  height: 10%;
+  @apply bg-gray-400 w-full flex justify-between items-center p-4;
+}
